@@ -13,7 +13,8 @@ namespace FiguresSerialize
             Figure hexagon = new Figure() { Name = "Hexagon", SideCount = 6, SideLenght = 1 };
             Figure octagon = new Figure() { Name = "Oktagon", SideCount = 8, SideLenght = 1 };
             hexagon.Figure1 = octagon;
-            //octagon.Figure1 = octagon;
+            //вызовет ошибку из-за циклического вызова
+            octagon.Figure1 = octagon;    
             
             listOfFigures.Add(new Figure() { Name = "Triangle", SideCount = 3, SideLenght = 1 });
             listOfFigures.Add(new Figure() { Name = "Square", SideCount = 4, SideLenght = 1 });
@@ -21,7 +22,6 @@ namespace FiguresSerialize
             listOfFigures.Add(hexagon);
             listOfFigures.Add(octagon);
             
-
             string path = Path.Combine("Fugures");
             DirectoryInfo MainDirectoryInfo = new DirectoryInfo(path);
             string FiguresfileNameJSON = "FiguresJSON.txt";
@@ -36,7 +36,6 @@ namespace FiguresSerialize
             {
                 Figure.SerializeToJSON(fileStream, listOfFigures);
             }
-
             List<Figure> listFromJSON;
             using (FileStream fileStream = new FileStream($"{path}\\{FiguresfileNameJSON}", FileMode.Open))
             {
@@ -77,7 +76,6 @@ namespace FiguresSerialize
             {
                 Console.WriteLine($"    {figure.Name} ({figure.SideCount},{figure.SideLenght})");
             }
-            
          }
     }
 
