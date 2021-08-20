@@ -46,7 +46,7 @@ namespace FiguresSerialize
             Console.WriteLine("From JSON:");
             foreach (var figure in listFromJSON)
             {
-                Console.WriteLine($"    {figure.Name} ({figure.SideCount},{figure.SideLenght})");
+                figure.Display();
             }
             //  XML
             using (FileStream fileStream = new FileStream($"{path}\\{FiguresfileNameXML}", FileMode.Create))
@@ -61,7 +61,7 @@ namespace FiguresSerialize
             }
             foreach (var figure in listFromXML)
             {
-                Console.WriteLine($"    {figure.Name} ({figure.SideCount},{figure.SideLenght})");
+                figure.Display();
             }
             //  Binary
             using (FileStream fileStream = new FileStream($"{path}\\{FiguresfileNameBinary}", FileMode.Create))
@@ -76,9 +76,11 @@ namespace FiguresSerialize
             }
             foreach (var figure in listFromBinary)
             {
-                Console.WriteLine($"    {figure.Name} ({figure.SideCount},{figure.SideLenght})");
+                figure.Display();
             }
          }
+        
+        
         public static void SerializeToJSON(FileStream fs, List<Figure> listOfFigures)
         {
             string json = JsonConvert.SerializeObject(listOfFigures);
